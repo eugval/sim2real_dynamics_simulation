@@ -1,0 +1,2 @@
+from robosuite_extra.slide_env.slide_task import SlideTask
+from robosuite_extra.slide_env.sawyer_slide import SawyerSlide

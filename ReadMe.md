@@ -1,7 +1,7 @@
 # Bridging the Gap: A Deep Dive into Zero-Shot Sim-to-Real Transfer for Dynamics
 
 This Repository contains the code used for training the manipulation policies in simulation,
-before deploying it ot the real world using the ros package found here: https://github.com/eugval/sim2real_dynamics_robot
+before deploying it to the real world using the ros package found here: https://github.com/eugval/sim2real_dynamics_robot
 
 ### Dependencies
 In order to run this project,  the following dependencies need to be satisfied.

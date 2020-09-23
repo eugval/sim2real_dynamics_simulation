@@ -20,7 +20,7 @@ import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)  # add parent path
-from sim2real_policies.test.rl_utils import load, load_model
+from sim2real_policies.utils.rl_utils import load, load_model
 from utils.choose_env import choose_env
 import torch.optim as optim
 import torch.multiprocessing as mp
@@ -181,33 +181,33 @@ class EPI(object):
 
         return idx
 
-        """
-        original implementation of separation loss in EPI paper is follow:
-        def separation_loss(y_true, y_pred):
-
-            y_true = tf.squeeze(y_true)
-            env_id, _ = tf.unique(y_true)
-
-            mu = []
-            sigma = []
-            for i in range(EPI.NUM_OF_ENVS):
-                idx = tf.where(tf.equal(y_true, env_id[i]))
-                traj = tf.gather(y_pred, idx)
-                mu.append(tf.squeeze(K.mean(traj, axis=0)))
-                this_sigma = tf.maximum(K.mean(K.std(traj, axis=0))-0.1, 0)
-                sigma.append(this_sigma)
-
-            mu = tf.stack(mu)
-            r = tf.reduce_sum(mu * mu, 1)
-            r = tf.reshape(r, [-1, 1])
-            D = (r - 2 * tf.matmul(mu, tf.transpose(mu)) + tf.transpose(r))/tf.constant(EPI.EMBEDDING_DIMENSION, dtype=tf.float32)
-            D = tf.sqrt(D + tf.eye(EPI.NUM_OF_ENVS, dtype=tf.float32))
-            distance = K.mean(tf.reduce_sum(0.1 - tf.minimum(D, 0.1)))
-
-            sigma = tf.stack(sigma)
-
-            return (distance + K.mean(sigma))*0.01
-        """
+        # """
+        # original implementation of separation loss in EPI paper is follow:
+        # def separation_loss(y_true, y_pred):
+        #
+        #     y_true = tf.squeeze(y_true)
+        #     env_id, _ = tf.unique(y_true)
+        #
+        #     mu = []
+        #     sigma = []
+        #     for i in range(EPI.NUM_OF_ENVS):
+        #         idx = tf.where(tf.equal(y_true, env_id[i]))
+        #         traj = tf.gather(y_pred, idx)
+        #         mu.append(tf.squeeze(K.mean(traj, axis=0)))
+        #         this_sigma = tf.maximum(K.mean(K.std(traj, axis=0))-0.1, 0)
+        #         sigma.append(this_sigma)
+        #
+        #     mu = tf.stack(mu)
+        #     r = tf.reduce_sum(mu * mu, 1)
+        #     r = tf.reshape(r, [-1, 1])
+        #     D = (r - 2 * tf.matmul(mu, tf.transpose(mu)) + tf.transpose(r))/tf.constant(EPI.EMBEDDING_DIMENSION, dtype=tf.float32)
+        #     D = tf.sqrt(D + tf.eye(EPI.NUM_OF_ENVS, dtype=tf.float32))
+        #     distance = K.mean(tf.reduce_sum(0.1 - tf.minimum(D, 0.1)))
+        #
+        #     sigma = tf.stack(sigma)
+        #
+        #     return (distance + K.mean(sigma))*0.01
+        # """
     def separation_loss(self, params_list, trajs):
         # get list of parameters from ordered dictionary
         list_params = []

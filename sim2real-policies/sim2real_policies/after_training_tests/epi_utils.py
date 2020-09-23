@@ -76,7 +76,6 @@ def EPIpolicy_rollout(env,  epi_policy,s, mujoco_start_time , logger= None,data_
         env.set_dynamics_parameters(params)
     # env.renderer_on()
     for epi_iter in range(10): # max iteration for getting a single rollout
-        #TODO: Check this change: the environment has just been reset when doning the epi, we pass the resulting state in the arguments
         #s = env.reset()
         traj=[]
         for _ in range(max_steps):

@@ -1,18 +1,9 @@
 import numpy as np
 from robosuite_extra.env_base import make
-import time
-import robosuite_extra.utils.transform_utils as T
 from robosuite_extra.wrappers import EEFXVelocityControl, GymWrapper, FlattenWrapper
 from sim2real_policies.final_policy_testing.network_loading import load, load_model
-import math
-from sim2real_calibration_characterisation.utils.logger import Logger
-from robosuite_extra.reach_env import SawyerReach
-import pickle
 import os
-import torch
 from sim2real_policies.utils.choose_env import reach_force_noise_randomisation,reach_force_randomisation,reach_full_randomisation, push_full_randomisation
-from sim2real_policies.sys_id.common.utils import query_params
-from sim2real_policies.sys_id.universal_policy_online_system_identification.osi import stack_data
 from sim2real_policies.final_policy_testing.epi_utils import EPIpolicy_rollout
 import copy
 

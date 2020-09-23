@@ -11,7 +11,7 @@ import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)  # add parent path
-from sim2real_policies.test.rl_utils import load, load_model
+from sim2real_policies.utils.rl_utils import load, load_model
 from utils.choose_env import choose_env
 from sim2real_policies.sys_id.common.utils import offline_history_collection
 from sim2real_policies.sys_id.common.operations import size_splits_in_two

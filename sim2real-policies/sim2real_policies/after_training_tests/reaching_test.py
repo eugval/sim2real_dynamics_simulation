@@ -5,7 +5,7 @@ import robosuite_extra.utils.transform_utils as T
 from robosuite_extra.wrappers import EEFXVelocityControl, GymWrapper, FlattenWrapper
 from sim2real_policies.final_policy_testing.network_loading import load, load_model
 import math
-from sim2.logger import Logger
+from sim2real_policies.utils.logger import Logger
 from robosuite_extra.reach_env import SawyerReach
 import pickle
 import os
@@ -13,7 +13,7 @@ import torch
 from sim2real_policies.utils.choose_env import reach_force_noise_randomisation,reach_force_randomisation,reach_full_randomisation
 from sim2real_policies.sys_id.common.utils import query_params
 from sim2real_policies.sys_id.universal_policy_online_system_identification.osi import stack_data
-from epi_utils import EPIpolicy_rollout
+from .epi_utils import EPIpolicy_rollout
 
 REACH_GOALS= [ np.array([0.,0.]),np.array([-4.465e-2,5.85e-2]),np.array([8.37e-2,-5.78e-2])]
 
@@ -80,7 +80,6 @@ def main():
 
     for policy_idx in range(1):
         ##### SETTING UP THE POLICY #########
-        # TODO: figure out what to do with EPI and UPOSI for loading them properly
         method = ['Single', 'LSTM', 'EPI', 'UPOSI'][policy_idx]
         if(method == 'Single'):
             alg_idx = 1
@@ -193,19 +192,12 @@ def main():
                     mujoco_start_time = env.sim.data.time
 
                     if (alg_name == 'uposi_td3'):
-                        epi_traj = []
+                        uposi_traj = []
                         # params = query_params(env, randomised_only=RANDOMISZED_ONLY, dynamics_only=DYNAMICS_ONLY)
                         zero_osi_input = np.zeros(osi_input_dim)
                         pre_params = osi_model(zero_osi_input).detach().numpy()
                         params_state = np.concatenate((pre_params, obs))
                     elif (alg_name == 'epi_td3'):
-
-                        # TODO: Check this change -> taking out the reset in EPIpolicy_rollout so that we dont have to switch randomisation on and off
-                        # params=env.get_dynamics_parameters()
-                        # env.randomisation_off()
-                        # epi rollout first for each episode
-
-                        #TODO: Check this change -> I separated the No reset and reset further, by logging the trajectory of no reset
                         if NO_RESET:
 
                             i=traj_l-1
@@ -235,14 +227,13 @@ def main():
 
 
 
-                            #TODO: check this change -> only adding randomisaiton on and off when resetting the environment
+
                             params = env.get_dynamics_parameters()
                             env.randomisation_off()
                             env.set_dynamics_parameters(params) # same as the rollout env
-                            obs =  env.reset()
+                            obs =  env.reset() #Reset to make the params take effect
                             env.randomisation_on()
 
-                        #TODO: make sure this is corect -> for UPOSI params are concatenated before obs, here its the other way arround
                         obs=np.concatenate((obs, embedding))
 
 
@@ -275,11 +266,10 @@ def main():
                             else:
                                 full_action = action
 
-                            #TODO: check -> here is says epi under the uposi case, I think its just a naming issue?
-                            epi_traj.append(np.concatenate((full_state, full_action)))
+                            uposi_traj.append(np.concatenate((full_state, full_action)))
 
-                            if len(epi_traj)>=osi_l:
-                                osi_input = stack_data(epi_traj, osi_l)
+                            if len(uposi_traj)>=osi_l:
+                                osi_input = stack_data(uposi_traj, osi_l)
                                 pre_params = osi_model(osi_input).detach().numpy()
                             else:
                                 zero_osi_input = np.zeros(osi_input_dim)

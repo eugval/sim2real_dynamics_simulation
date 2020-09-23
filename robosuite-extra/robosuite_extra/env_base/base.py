@@ -150,7 +150,6 @@ class MujocoEnv(metaclass=EnvMeta):
 
     def reset(self):
         """Resets simulation."""
-        # TODO(yukez): investigate black screen of death
         # if there is an active viewer window, destroy it
         self._destroy_viewer()
         self._reset_internal()

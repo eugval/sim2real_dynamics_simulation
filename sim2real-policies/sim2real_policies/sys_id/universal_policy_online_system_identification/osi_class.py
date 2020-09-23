@@ -6,23 +6,10 @@ Examples of two types:
 1. Off-line SI: in sim2real_policies.sys_id.common.utils
 2. On-line SI
 """
-import numpy as np
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-from torch.distributions import Normal
-import math
-import os,sys,inspect
-# currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-# parentdir = os.path.dirname(currentdir)
-# sys.path.insert(0,parentdir)  # add parent path
-import torch.optim as optim
-from gym import spaces
-from sim2real_policies.utils.policy_networks import DPG_PolicyNetwork
-from sim2real_policies.sys_id.common.nets import *
+
 from sim2real_policies.sys_id.common.operations import *
 from sim2real_policies.sys_id.common.utils import *
-from sim2real_policies.test.rl_utils import load, load_model
+from sim2real_policies.utils.rl_utils import load, load_model
 from sim2real_policies.utils.choose_env import choose_env
 
 

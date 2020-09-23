@@ -2,11 +2,7 @@
 import numpy as np
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-from torch.distributions import Normal
-import math
 import os,sys,inspect
-from gym import spaces
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)  # add parent path
@@ -16,25 +12,6 @@ from sim2real_policies.utils.choose_env import choose_env
 from sim2real_policies.utils.policy_networks import DPG_PolicyNetwork, RandomPolicy
 
 from mujoco_py import MujocoException
-
-def query_key_params(env, normalize=True):
-    """
-    key parameters from heuristic: the proportional gains on 0, 1, 3, 5 joints
-    """
-    pass
-    # joint_idx=[0]   #[0,1,3,5]
-    # params_dict = env.get_dynamics_parameters()
-    # params_ranges = env.get_parameter_sampling_ranges()
-    # params_factors = env.get_factors_for_randomisation()
-    # param_value = params_dict['kps']
-    # if normalize:
-    #     param_range = params_ranges['gains']
-    #     param_factor = params_factors['kps']
-    #     scale = param_range[1]-param_range[0]
-    #     param_value = (param_value/(param_factor) - param_range[0])/scale
-    # selected_param_value = param_value[joint_idx]
-    
-    # return np.array(selected_param_value)
 
 def query_params(env, normalize=True, randomised_only=False, dynamics_only=False):
     """

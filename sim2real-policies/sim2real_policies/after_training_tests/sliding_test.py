@@ -5,7 +5,7 @@ import robosuite_extra.utils.transform_utils as T
 from robosuite_extra.wrappers import EEFXVelocityControl, GymWrapper, FlattenWrapper
 
 import math
-from sim2real_calibration_characterisation.utils.logger import Logger
+from sim2real_policies.utils.logger import Logger
 from robosuite_extra.slide_env import SawyerSlide
 import pickle
 import os
@@ -57,7 +57,6 @@ def main():
 
     for policy_idx in range(1):
         ##### SETTING UP THE POLICY #########
-        # TODO: figure out what to do with EPI and UPOSI for loading them properly
         method = ['Single', 'LSTM', 'EPI', 'UPOSI'][policy_idx]
         if(method == 'Single'):
             alg_idx = 1
@@ -165,19 +164,14 @@ def main():
                 mujoco_start_time = env.sim.data.time
 
                 if (alg_name == 'uposi_td3'):
-                    epi_traj = []
+                    uposi_traj = []
                     # params = query_params(env, randomised_only=RANDOMISZED_ONLY, dynamics_only=DYNAMICS_ONLY)
                     zero_osi_input = np.zeros(osi_input_dim)
                     pre_params = osi_model(zero_osi_input).detach().numpy()
                     params_state = np.concatenate((pre_params, obs))
                 elif (alg_name == 'epi_td3'):
 
-                    # TODO: Check this change -> taking out the reset in EPIpolicy_rollout so that we dont have to switch randomisation on and off
-                    # params=env.get_dynamics_parameters()
-                    # env.randomisation_off()
-                    # epi rollout first for each episode
 
-                    # TODO: Check this change -> I separated the No reset and reset further, by logging the trajectory of no reset
                     if NO_RESET:
 
                         i = traj_l - 1
@@ -204,14 +198,14 @@ def main():
                         embedding = embed_model(state_action_in_traj.reshape(-1))
                         embedding = embedding.detach().cpu().numpy()
 
-                        # TODO: check this change -> only adding randomisaiton on and off when resetting the environment
+
                         params = env.get_dynamics_parameters()
                         env.randomisation_off()
                         env.set_dynamics_parameters(params)  # same as the rollout env
                         obs = env.reset()
                         env.randomisation_on()
 
-                    # TODO: make sure this is corect -> for UPOSI params are concatenated before obs, here its the other way arround
+
                     obs = np.concatenate((obs, embedding))
 
                 while (True):
@@ -241,10 +235,10 @@ def main():
                             full_action = np.concatenate([action, target_joint_action])
                         else:
                             full_action = action
-                        epi_traj.append(np.concatenate((full_state, full_action)))
+                        uposi_traj.append(np.concatenate((full_state, full_action)))
 
-                        if len(epi_traj)>=osi_l:
-                            osi_input = stack_data(epi_traj, osi_l)
+                        if len(uposi_traj)>=osi_l:
+                            osi_input = stack_data(uposi_traj, osi_l)
                             pre_params = osi_model(osi_input).detach().numpy()
                         else:
                             zero_osi_input = np.zeros(osi_input_dim)

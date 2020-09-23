@@ -1,6 +1,4 @@
 import numpy as np
-from robosuite_extra.env_base import make
-import time
 import torch
 from sim2real_policies.sys_id.common.utils import query_params
 from mujoco_py import MujocoException

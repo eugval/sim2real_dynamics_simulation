@@ -2,41 +2,20 @@
 Multi-processing version of PPO continuous v1
 '''
 
-
-import math
-import random
-
-import gym
-import numpy as np
-
 import torch
 torch.multiprocessing.set_start_method('forkserver', force=True) # critical for make multiprocessing work
-import torch.nn as nn
-import torch.optim as optim
-import torch.nn.functional as F
-from torch.distributions import Normal, MultivariateNormal
-
-from IPython.display import clear_output
-import matplotlib.pyplot as plt
-from matplotlib import animation
-from IPython.display import display
+from torch.distributions import Normal
 import argparse
 import time
 
 import torch.multiprocessing as mp
-from torch.multiprocessing import Process
-
-from multiprocessing import Process, Manager
-from multiprocessing.managers import BaseManager
-
-import threading as td
+from multiprocessing import Process
 from sim2real_policies.utils.value_networks import *
 from sim2real_policies.utils.policy_networks import PPO_PolicyNetwork
 from sim2real_policies.utils.choose_env import choose_env
 from sim2real_policies.utils.envs import make_env
 from sim2real_policies.utils.evaluate import evaluate
 from sim2real_policies.utils.optimizers import SharedAdam, ShareParameters
-from sim2real_policies.utils.initialize import AddBias
 from sim2real_policies.utils.load_params import load_params
 
 #####  hyper-parameters for RL training  ############

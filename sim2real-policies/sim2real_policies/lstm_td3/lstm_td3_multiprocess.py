@@ -11,21 +11,9 @@ import numpy as np
 
 import torch
 torch.multiprocessing.set_start_method('forkserver', force=True) # critical for make multiprocessing work
-import torch.nn as nn
-import torch.optim as optim
-import torch.nn.functional as F
-from torch.distributions import Normal
-
-# from IPython.display import clear_output
-import matplotlib.pyplot as plt
-from matplotlib import animation
-from IPython.display import display
 
 import argparse
-import time
-
 import torch.multiprocessing as mp
-from torch.multiprocessing import Process
 
 from multiprocessing import Process, Manager
 from multiprocessing.managers import BaseManager

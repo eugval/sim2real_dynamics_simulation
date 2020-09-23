@@ -1,6 +1,4 @@
 import math
-import random
-import numpy as np
 import torch
 import torch.optim as optim
 

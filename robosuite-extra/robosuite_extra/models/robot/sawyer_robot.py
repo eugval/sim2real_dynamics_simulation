@@ -65,7 +65,7 @@ class Sawyer(Robot):
                     'right_j6': {'p': 1.62834673e+01, 'i': 1.71284099e+00, 'd':  8.44274724e-02},
                     }
 
-    #TODO: optimise those
+
     @property
     def position_pid_gains(self):
 

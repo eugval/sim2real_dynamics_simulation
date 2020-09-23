@@ -1,18 +1,10 @@
 import numpy as np
 from robosuite_extra.env_base import make
-import time
 import robosuite_extra.utils.transform_utils as T
 from robosuite_extra.wrappers import EEFXVelocityControl, GymWrapper, FlattenWrapper
 from sim2real_policies.final_policy_testing.network_loading import load, load_model
-import math
-from sim2real_calibration_characterisation.utils.logger import Logger
-from robosuite_extra.reach_env import SawyerReach
-import pickle
-import os
-import torch
+from sim2real_policies.utils.logger import Logger
 from sim2real_policies.utils.choose_env import reach_full_randomisation, push_full_randomisation, slide_full_randomisation
-from sim2real_policies.sys_id.common.utils import query_params
-from sim2real_policies.sys_id.universal_policy_online_system_identification.osi import stack_data
 from sim2real_policies.final_policy_testing.epi_utils import EPIpolicy_rollout
 
 
@@ -330,12 +322,6 @@ def main():
                     if (use_white_noise):
                         embedding = np.random.uniform(-1., 1., size=(embed_dim,))
                     else:
-                        # TODO: Check this change -> taking out the reset in EPIpolicy_rollout so that we dont have to switch randomisation on and off
-                        # params=env.get_dynamics_parameters()
-                        # env.randomisation_off()
-                        # epi rollout first for each episode
-
-                        # TODO: Check this change -> I separated the No reset and reset further, by logging the trajectory of no reset
                         if NO_RESET:
 
                             i = traj_l - 1
@@ -369,14 +355,13 @@ def main():
                             embedding = embed_model(state_action_in_traj.reshape(-1))
                             embedding = embedding.detach().cpu().numpy()
 
-                            # TODO: check this change -> only adding randomisaiton on and off when resetting the environment
+
                             params = env.get_dynamics_parameters()
                             env.randomisation_off()
                             env.set_dynamics_parameters(params)  # same as the rollout env
                             obs = env.reset()
                             env.randomisation_on()
 
-                        # TODO: make sure this is corect -> for UPOSI params are concatenated before obs, here its the other way arround
 
                     obs = np.concatenate((obs, embedding))
 

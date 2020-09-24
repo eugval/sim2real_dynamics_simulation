@@ -12,6 +12,7 @@ Openai mujoco-py : https://github.com/openai/mujoco-py \
 urdf_parser_py : https://github.com/ros/urdf_parser_py \
 PyKDL : If the pip version does not work, it will need to be compiled from scratch by following the instructions
 at https://github.com/orocos/orocos_kinematics_dynamics/issues/115
+Robosuite (version 0.1.0): https://github.com/StanfordVL/robosuite 
 
 
 The following forked repositories:
@@ -21,6 +22,8 @@ simple-pid, the branch allow arrays from https://github.com/eugval/simple-pid/tr
 Other dependencies are listed in  requirements.txt.
 
 ### Project Structure
+Each of the following need to be installed independently by navigating to the corresponding folder and running ```pip install -e .```.
+
 ``robosuite-extra`` implements extra environments and functionalities for the robosuite framework
 
 ``sim2real-policies`` implements the methods for training and evaluating the different sim2real polcies.
@@ -28,4 +31,6 @@ Other dependencies are listed in  requirements.txt.
 ``reality-calibration-characterisation`` implements code to identify and characterise the different sources of error
 when transferring from simulation to the real world for the given tasks, as well as scripts to optimise  simulator 
 parameters.
+
+
 

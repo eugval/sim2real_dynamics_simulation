@@ -33,4 +33,28 @@ when transferring from simulation to the real world for the given tasks, as well
 parameters.
 
 
+### Acknowedgments
+
+Our environments are created using Robosuite (https://github.com/ARISE-Initiative/robosuite), part of which we modified in robosuite-extra to suite our project.
+
+If you are using this code in your work, please consider citing our paper:
+
+```
+@inproceedings{
+
+valassakis2020crossing,
+
+title={Crossing the Gap: A Deep Dive into Zero-Shot Sim-to-Real Transfer for Dynamics},
+
+author={Valassakis, Eugene and Ding, Zihan and Johns, Edward},
+
+booktitle={International Conference on Intelligent Robots and Systems (IROS)},
+
+year={2020}
+
+}
+```
+
+
+
 

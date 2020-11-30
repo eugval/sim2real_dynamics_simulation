@@ -11,7 +11,7 @@ Openai gym : https://github.com/openai/gym \
 Openai mujoco-py : https://github.com/openai/mujoco-py \
 urdf_parser_py : https://github.com/ros/urdf_parser_py \
 PyKDL : If the pip version does not work, it will need to be compiled from scratch by following the instructions
-at https://github.com/orocos/orocos_kinematics_dynamics/issues/115
+at https://github.com/orocos/orocos_kinematics_dynamics/issues/115 \
 Robosuite (version 0.1.0): https://github.com/StanfordVL/robosuite 
 
 
@@ -19,7 +19,7 @@ The following forked repositories:
 kdl_parser, the branch fixing_setup_py from https://github.com/eugval/kdl_parser/tree/fixing_setup_py 
 simple-pid, the branch allow arrays from https://github.com/eugval/simple-pid/tree/allow_arrays
 
-Other dependencies are listed in  requirements.txt.
+Simpler dependencies are listed (that can be recursively installed) in  requirements.txt.
 
 ### Project Structure
 Each of the following need to be installed independently by navigating to the corresponding folder and running ```pip install -e .```.

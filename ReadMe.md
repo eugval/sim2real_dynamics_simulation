@@ -37,7 +37,7 @@ parameters.
 
 Our environments are created using Robosuite (https://github.com/ARISE-Initiative/robosuite), part of which we modified in robosuite-extra to suite our project.
 
-If you are using this code in your work, please consider citing our paper:
+If you are using this code in your work, please also consider citing our paper:
 
 ```
 @inproceedings{

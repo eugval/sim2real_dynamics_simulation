@@ -1,3 +1,10 @@
+'''
+Taken and  modified from the original robosuite repository (version 0.1.0)
+Our fork with version 0.1.0 : https://github.com/eugval/robosuite
+Official Robosuite Repository : https://github.com/ARISE-Initiative/robosuite
+
+'''
+
 import numpy as np
 
 import robosuite_extra.utils.transform_utils as T

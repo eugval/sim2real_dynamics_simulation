@@ -1,3 +1,11 @@
+'''
+Taken and  modified from the original robosuite repository (version 0.1.0)
+Our fork with version 0.1.0 : https://github.com/eugval/robosuite
+Official Robosuite Repository : https://github.com/ARISE-Initiative/robosuite
+
+'''
+
+
 from collections import OrderedDict
 from mujoco_py import MjSim, MjRenderContextOffscreen
 from mujoco_py import load_model_from_xml

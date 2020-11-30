@@ -1,6 +1,12 @@
-"""
+'''
+Taken and  modified from the original robosuite repository (version 0.1.0)
+Our fork with version 0.1.0 : https://github.com/eugval/robosuite
+Official Robosuite Repository : https://github.com/ARISE-Initiative/robosuite
+
 A version of TwoFingerGripper but always closed.
-"""
+'''
+
+
 import numpy as np
 from robosuite.models.grippers.two_finger_gripper import TwoFingerGripper
 

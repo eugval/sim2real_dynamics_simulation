@@ -1,3 +1,10 @@
+'''
+Taken and  modified from the original robosuite repository (version 0.1.0)
+Our fork with version 0.1.0 : https://github.com/eugval/robosuite
+Official Robosuite Repository : https://github.com/ARISE-Initiative/robosuite
+
+'''
+
 from robosuite.models.objects import MujocoGeneratedObject
 from robosuite.models.objects.generated_objects import _get_size , _get_randomized_range, DEFAULT_DENSITY_RANGE
 import numpy as np

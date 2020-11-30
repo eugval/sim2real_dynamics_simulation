@@ -1,6 +1,3 @@
-"""
-A version of TwoFingerGripper but always closed.
-"""
 import numpy as np
 import os
 from robosuite.models.grippers.gripper import Gripper

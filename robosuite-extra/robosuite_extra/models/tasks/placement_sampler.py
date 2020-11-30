@@ -1,3 +1,10 @@
+'''
+Taken and  modified from the original robosuite repository (version 0.1.0)
+Our fork with version 0.1.0 : https://github.com/eugval/robosuite
+Official Robosuite Repository : https://github.com/ARISE-Initiative/robosuite
+
+'''
+
 from robosuite.models.tasks.placement_sampler import  ObjectPositionSampler, UniformRandomSampler
 import collections
 import numpy as np

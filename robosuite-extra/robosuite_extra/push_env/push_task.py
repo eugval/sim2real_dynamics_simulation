@@ -1,3 +1,10 @@
+'''
+Taken and modified from the original robosuite repository (version 0.1.0)
+Our fork with version 0.1.0 : https://github.com/eugval/robosuite
+Official Robosuite Repository : https://github.com/ARISE-Initiative/robosuite
+
+'''
+
 from robosuite.models.tasks import Task
 from robosuite_extra.models.tasks import UniformSelectiveSampler
 from robosuite.utils.mjcf_utils import new_joint, array_to_string
